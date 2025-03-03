@@ -1,0 +1,15 @@
+.gender-container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    color: white;
+    font-size: 15px;
+    margin-top: 1rem;
+}
+.movies-container{
+    width: 100%;
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+}

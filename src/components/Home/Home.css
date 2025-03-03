@@ -1,0 +1,9 @@
+.home-container{
+    width: 100vw;
+    min-height: 100vh;
+    padding: 1rem;
+    padding-top: 60px;
+    background: black;
+    display: flex;
+    flex-direction: column;
+}
