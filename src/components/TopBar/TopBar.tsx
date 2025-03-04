@@ -1,7 +1,12 @@
 import { useEffect, useRef, useState } from "react"
 import "./TopBar.css"
 
-function TopBar(){
+interface TopBarProps {
+    searchTerm: string;
+    setSearchTerm: (value: string) => void;
+}
+
+function TopBar({ searchTerm, setSearchTerm }: TopBarProps){
     const [showInput, setShowInput] = useState<Boolean>(false);
     const refInput = useRef<HTMLInputElement | null>(null);
 
@@ -18,7 +23,7 @@ function TopBar(){
         document.removeEventListener("mousedown", handleClickOutside);
       };
     }, []);
-    
+
     return(
         <div className="top-bar">
             <div className="c c-left">
@@ -30,7 +35,15 @@ function TopBar(){
                 <div className="menu">Bombando</div>
             </div>
             <div className="c c-right">
-                {showInput && <input ref={refInput} placeholder="Busque por títulos" className="search-input" type="text" />}
+                {showInput && 
+                    <input 
+                        ref={refInput} 
+                        placeholder="Busque por títulos" 
+                        className="search-input" 
+                        type="text"
+                        value={searchTerm}
+                        onChange={(e)=> setSearchTerm(e.target.value)}
+                    />}
                 {!showInput && 
                     <div onClick={() => setShowInput(true)} className="search-btn">
                         <i className="fa-solid fa-magnifying-glass"></i>

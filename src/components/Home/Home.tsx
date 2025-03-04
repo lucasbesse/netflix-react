@@ -2,10 +2,12 @@ import "./Home.css"
 import { getGenders } from "../../services/movies-service"
 import { useEffect, useState } from "react"
 import GenderSlide from "../GenderSlide/GenderSlide"
+import { Gender } from "../../interfaces/Gender.interface"
 import TopBar from "../TopBar/TopBar"
 
 function Home(){
-    const [genders, setGenders] = useState<Array<any>>([])
+    const [genders, setGenders] = useState<Gender[]>([])
+    const [searchTerm, setSearchTerm] = useState<string>('');
 
     useEffect(()=>{
         fetchMoviesList();
@@ -14,16 +16,16 @@ function Home(){
     async function fetchMoviesList(): Promise<void>{
         const data = await getGenders();
         if(data){
-            setGenders(data.genres)
+            setGenders(data)
         }
     }
 
     return(
         <div className="home-container">
-            <TopBar />
+            <TopBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
             <div className="genders-home-container">
                 {genders.map(gender =>{
-                    return <GenderSlide gender={gender}/>
+                    return <GenderSlide searchTerm={searchTerm} gender={gender}/>
                 })}
             </div>
         </div>

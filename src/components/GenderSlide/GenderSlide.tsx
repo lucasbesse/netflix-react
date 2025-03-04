@@ -1,14 +1,17 @@
 import "./GenderSlide.css"
 import Card from "../Card/Card"
+import { Movie } from "../../interfaces/Movie.interface";
+import { Gender } from "../../interfaces/Gender.interface";
 import { getMoviesByGender } from "../../services/movies-service"
 import { useEffect, useState, memo } from "react";
 
 interface GenderSlideProps {
-    gender: any
+    gender: Gender;
+    searchTerm: string;
 }
 
-function GenderSlide({gender}: GenderSlideProps){
-    const [movies, setMovies] = useState([]);
+function GenderSlide({gender, searchTerm}: GenderSlideProps){
+    const [movies, setMovies] = useState<Movie[]>([]);
     const [margin, setMargin] = useState(0);
     const step = 600;
 
@@ -19,10 +22,15 @@ function GenderSlide({gender}: GenderSlideProps){
     async function getMovies(): Promise<void>{
         const response = await getMoviesByGender(gender.id)
         if(response){
-            setMovies(response.results)
+            setMovies(response)
         }
     }
-    
+
+    const filteredMovies = movies.filter((movie: Movie) => movie.title.toLowerCase().includes(searchTerm))
+    if (filteredMovies.length === 0) {
+        return null;
+    }
+
     function handleSlide(direction: "left" | "right") {
         if (direction === "right") {
             setMargin((prev) => Math.max(prev - step, -((movies.length - 1) * step)));
@@ -35,7 +43,7 @@ function GenderSlide({gender}: GenderSlideProps){
         <div className="gender-container">
             <span className="g-name">{gender.name}</span>
             <div className="movies-container" style={{ marginLeft: `${margin}px` }}>
-                {movies.map(movie=>{
+                {filteredMovies.map((movie: any)=>{
                     return <Card movie={movie}/>
                 })}
             </div>
