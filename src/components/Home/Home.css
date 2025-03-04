@@ -1,9 +1,12 @@
 .home-container{
     width: 100vw;
     min-height: 100vh;
-    padding: 1rem;
-    padding-top: 60px;
+    padding: 3rem;
+    padding-top: 0;
     background: black;
     display: flex;
     flex-direction: column;
+}
+.genders-home-container{
+    margin-top: 60px;
 }

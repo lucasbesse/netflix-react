@@ -2,7 +2,7 @@ import "./TopBar.css"
 
 function TopBar(){
     return(
-        <div></div>
+        <div className="top-bar"></div>
     )
 }
 export default TopBar

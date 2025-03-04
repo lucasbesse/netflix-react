@@ -5,11 +5,42 @@
     align-items: flex-start;
     color: white;
     font-size: 15px;
-    margin-top: 1rem;
+    margin-top: 2rem;
+    overflow: hidden;
+    position: relative;
+}
+.gender-container:hover .slider{
+    display: flex !important;
 }
 .movies-container{
     width: 100%;
     margin-top: 0.5rem;
     display: flex;
     align-items: center;
+    transition: margin 0.5s ease-in-out;
+}
+.g-name{
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+.slider{
+    height: 180px;
+    font-size: 27px;
+    background: rgba(0,0,0,0.5);
+    display: none;
+    align-items: center;
+    padding: 10px;
+    justify-content: center;
+    position: absolute;
+    transition: all ease 0.2s;
+    cursor: pointer;
+}
+.slider:hover{
+    background: rgba(0,0,0,0.7);
+}
+.slider-left{
+    left: 0;
+}
+.slider-right{
+    right: 4.3rem;
 }

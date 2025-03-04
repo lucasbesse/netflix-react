@@ -4,7 +4,28 @@ const API_TOKEN = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkZGNlY2U2YjNiNDQ5N2FmNjI1ZGZh
 
 export async function getGenders(): Promise<any>{
     try{
-        const response = await fetch(`${API_URL}genre/movie/list`, {
+        const response = await fetch(`${API_URL}genre/movie/list?language=pt-BR`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${API_TOKEN}`
+            }
+        })
+        
+        if(!response.ok){
+            throw new Error('Erro ao buscar gêneros');
+        }
+        const data = await response.json()
+        return data;
+    }
+    catch(error){
+        throw new Error('Erro ao buscar gêneros');
+    }
+}
+
+export async function getMoviesByGender(gender: number): Promise<any>{
+    try{
+        const response = await fetch(`${API_URL}discover/movie?language=pt-BR&with_genres=${gender}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
