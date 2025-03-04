@@ -5,7 +5,7 @@ import GenderSlide from "../GenderSlide/GenderSlide"
 import TopBar from "../TopBar/TopBar"
 
 function Home(){
-    const [genders, setGenders] = useState([])
+    const [genders, setGenders] = useState<Array<any>>([])
 
     useEffect(()=>{
         fetchMoviesList();
